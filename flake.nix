@@ -15,18 +15,16 @@
         name = "hello-go-nix";
         version = "0.1.0";
       in
-      with pkgs;
       {
-        devShells.default = mkShell {
-          buildInputs = [
-            bashInteractive
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
             go
             gotools
             golangci-lint
           ];
         };
 
-        packages.default = buildGoModule {
+        packages.default = pkgs.buildGoModule {
           inherit name version;
           pname = name;
           src = ./.;
@@ -38,8 +36,8 @@
           meta = {
             description = "Simple hello app in Go and built with Nix";
             homepage = "https://github.com/alexandregv/hello-go-nix";
-            license = lib.licenses.mit;
-            maintainers = with lib.maintainers; [ alexandregv ];
+            license = pkgs.lib.licenses.mit;
+            maintainers = with pkgs.lib.maintainers; [ alexandregv ];
           };
         };
       }
