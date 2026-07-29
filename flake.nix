@@ -19,8 +19,11 @@
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             go
+            gopls
             gotools
             golangci-lint
+            tree-sitter
+            tree-sitter-grammars.tree-sitter-go
           ];
         };
 
